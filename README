@@ -1,1 +1,5 @@
-Please source env_setup to setup environment
+Please source env_setup to setup environment.
+
+create a task with:
+
+curl --data "name=nume_task&note=note_task&completed=0" --data-urlencode "due_date=24/12/2018 12:00:00" http://127.0.0.1:5000/api/v1/accounts/sebastian/tasks
