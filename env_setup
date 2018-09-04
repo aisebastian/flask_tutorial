@@ -3,4 +3,4 @@
 export FLASK_APP="$(pwd)/todo/app.py"
 export DEBUG='True'
 
-export DATABASE_URL='postgres://localhost:5432/flask_todo'
+export DATABASE_URL='postgres://postgres:test@localhost:5432/flask_todo'
