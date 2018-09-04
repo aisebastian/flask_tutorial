@@ -9,6 +9,8 @@ class Task(db.Model):
     creation_date = db.Column(db.DateTime, nullable=False)
     due_date = db.Column(db.DateTime)
     completed = db.Column(db.Boolean, default=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    user = db.relationship("User", back_populates="tasks")
 
     def __init__(self, *args, **kwargs):
         """On construction, set date of creation."""
@@ -24,6 +26,7 @@ class User(db.Model):
     password = db.Column(db.Unicode, nullable=False)
     date_joined = db.Column(db.DateTime, nullable=False)
     token = db.Column(db.Unicode, nullable=False)
+    tasks = db.relationship("Task", back_populates="user")
 
     def __init__(self, *args, **kwargs):
         """On construction, set date of creation."""
