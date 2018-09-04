@@ -2,6 +2,9 @@ from datetime import datetime
 from flask_sqlalchemy import SQLAlchemy
 from flask import jsonify
 from flask import Flask
+from flask import request
+from flask import Response
+import json
 import os
 
 app = Flask(__name__)
@@ -9,6 +12,9 @@ app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', '')
 db = SQLAlchemy(app)
 
 INCOMING_DATE_FMT = '%d/%m/%Y %H:%M:%S'
+
+from .models import Task, User
+
 
 @app.route('/')
 def hello_world():
@@ -46,7 +52,7 @@ def create_task(username):
             name=request.form['name'],
             note=request.form['note'],
             creation_date=datetime.now(),
-            due_date=datetime.strptime(due_date, INCOMING_DATE_FMT) if due_date else None,
+            due_date=datetime.strptime(request.form['due_date'], INCOMING_DATE_FMT) if request.form['due_date'] else None,
             completed=bool(request.form['completed']),
             user_id=user.id,
         )
